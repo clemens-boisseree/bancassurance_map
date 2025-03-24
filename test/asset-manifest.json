@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/banksurance_map/test/static/css/main.6e340243.css",
+    "main.js": "/banksurance_map/test/static/js/main.df9a414c.js",
+    "index.html": "/banksurance_map/test/index.html",
+    "main.6e340243.css.map": "/banksurance_map/test/static/css/main.6e340243.css.map",
+    "main.df9a414c.js.map": "/banksurance_map/test/static/js/main.df9a414c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6e340243.css",
+    "static/js/main.df9a414c.js"
+  ]
+}

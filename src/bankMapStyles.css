@@ -1,0 +1,632 @@
+/* Custom zoom control positioning */
+.leaflet-control-zoom {
+  margin-bottom: 70px !important; /* Add space above the compare button */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2) !important;
+  border-radius: 8px !important;
+  overflow: hidden;
+}
+
+.leaflet-control-zoom a {
+  background-color: rgba(0, 0, 0, 0.7) !important;
+  color: white !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  transition: all 0.2s ease;
+}
+
+.leaflet-control-zoom a:hover {
+  background-color: rgba(0, 0, 0, 0.9) !important;
+}/* Cluster marker styles */
+.custom-cluster-icon {
+  background-color: transparent !important;
+}/* Hauptcontainer für die Karte */
+
+.map-container {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .map-container {
+    height: calc(100vh - 60px); /* Adjust for mobile browser chrome */
+  }
+  
+  .tooltip {
+    width: 90%;
+    max-width: 300px;
+    left: 50%;
+    transform: translateX(-50%);
+    right: auto;
+  }
+  
+  .compare-button {
+    bottom: 10px;
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+}
+
+/* Marker animation for selected banks */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.pulse-marker {
+  animation: pulse 2s infinite ease-in-out;
+}
+
+/* Hide tooltip container but keep functionality */
+.empty-tooltip {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.empty-tooltip::before,
+.empty-tooltip::after {
+  display: none !important;
+}
+
+/* Modern marker styles */
+.leaflet-marker-icon {
+  transition: all 0.3s ease;
+}
+
+/* Tooltip Styles */
+.tooltip {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 9999;
+  background: rgba(31, 31, 31, 0.95);
+  color: white;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  padding: 1rem;
+  width: 20rem;
+  max-width: 90vw;
+  border: 1px solid #333;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  transition: all 0.3s ease-in-out;
+  animation: tooltipFadeIn 0.3s ease-out;
+}
+
+@keyframes tooltipFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tooltip-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #333;
+  padding-bottom: 0.5rem;
+}
+
+.logo-container {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 12px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #6b73ff 0%, #000dff 100%);
+  margin-right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.logo-container:hover {
+  transform: scale(1.05);
+}
+
+.name-container {
+  flex: 1;
+}
+
+.bank-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
+
+.bank-subtitle {
+  font-size: 1rem;
+  color: #3498db;
+  font-weight: bold;
+}
+
+.section {
+  margin-bottom: 0.75rem;
+}
+
+.section-label {
+  color: #999;
+  font-size: 0.875rem;
+  display: block;
+}
+
+.section-content {
+  font-size: 1rem;
+  display: block;
+}
+
+.badge {
+  display: inline-block;
+  padding: 8px 16px;
+  color: white;
+  font-size: 1reme;
+  margin-top: 0.75rem;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.badge-red {
+  background: linear-gradient(135deg, #ff3b30 0%, #dc3545 100%);
+  color: white;
+}
+
+.badge-orange {
+  background: linear-gradient(135deg, #ff9500 0%, #fd7e14 100%);
+  color: white;
+}
+
+.badge-yellow {
+  background: linear-gradient(135deg, #ffcc00 0%, #ffc107 100%);
+  color: #333;
+}
+
+.badge-green {
+  background: linear-gradient(135deg, #34c759 0%, #28a745 100%);
+  color: white;
+}
+
+.close-button {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: #333;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-size: 16px;
+  color: #999;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.close-button:hover {
+  background: #444;
+  transform: scale(1.1);
+  color: white;
+}
+
+.progress-bar-container {
+  margin-top: 0.5rem;
+  height: 10px;
+  width: 100%;
+  background-color: #333;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.5s ease-out;
+}
+
+.achievement-red {
+  color: #e74c3c;
+}
+
+.achievement-orange {
+  color: #e67e22;
+}
+
+.achievement-yellow {
+  color: #f1c40f;
+}
+
+.achievement-green {
+  color: #2ecc71;
+}
+
+.progress-bar-red {
+  background: linear-gradient(135deg, #ff3b30 0%, #dc3545 100%);
+}
+
+.progress-bar-orange {
+  background: linear-gradient(135deg, #ff9500 0%, #fd7e14 100%);
+}
+
+.progress-bar-yellow {
+  background: linear-gradient(135deg, #ffcc00 0%, #ffc107 100%);
+}
+
+.progress-bar-green {
+  background: linear-gradient(135deg, #34c759 0%, #28a745 100%);
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.footer {
+  font-size: 0.75rem;
+  color: #999;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.selection-button {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.button {
+  padding: 8px;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.875rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+}
+
+.button-blue {
+  background: linear-gradient(135deg, #6e8efb 0%, #4981fd 100%);
+  color: white;
+}
+
+.button-red {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5253 100%);
+  color: white;
+}
+
+/* Compare Button Styles */
+.compare-button {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #6e8efb 0%, #4981fd 100%);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.compare-button:hover {
+  transform: translateX(-50%) translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+.compare-button-disabled {
+  background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
+  cursor: default;
+}
+
+/* Flex utility classes */
+.flex-1 {
+  flex: 1;
+}
+
+/* Map Legend */
+.map-legend {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-size: 12px;
+  z-index: 1000;
+  max-width: 250px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.map-legend h4 {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  padding-bottom: 5px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.legend-color {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  margin-right: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.legend-divider {
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.3);
+  margin: 10px 0;
+}
+
+/* Toggle Switch Styles */
+.legend-toggle {
+  margin-top: 5px;
+}
+
+.toggle-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  width: 100%;
+}
+
+.toggle-text {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.toggle-switch-container {
+  position: relative;
+  width: 40px;
+  height: 20px;
+}
+
+.toggle-input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.toggle-switch {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #555;
+  border-radius: 20px;
+  transition: .4s;
+}
+
+.toggle-switch:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  border-radius: 50%;
+  transition: .4s;
+}
+
+.toggle-input:checked + .toggle-switch {
+  background-color: #3498db;
+}
+
+.toggle-input:checked + .toggle-switch:before {
+  transform: translateX(20px);
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 768px) {
+  .map-legend {
+    top: 10px;
+    left: 10px;
+    font-size: 10px;
+    padding: 8px 12px;
+    max-width: 180px;
+  }
+  
+  .map-legend h4 {
+    font-size: 12px;
+  }
+  
+  .legend-color {
+    width: 12px;
+    height: 12px;
+  }
+  
+  .toggle-switch-container {
+    width: 36px;
+    height: 18px;
+  }
+  
+  .toggle-switch:before {
+    height: 14px;
+    width: 14px;
+  }
+  
+  .toggle-input:checked + .toggle-switch:before {
+    transform: translateX(18px);
+  }
+}
+
+.cluster-marker {
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.5);
+  transition: all 0.3s ease;
+  animation: clusterPulse 2s infinite ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.cluster-marker span {
+  position: relative;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 50%;
+  width: 65%;
+  height: 65%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9em;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
+
+.cluster-marker:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.7);
+}
+
+@keyframes clusterPulse {
+  0% {
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.3);
+  }
+  100% {
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.5);
+  }
+}
+
+/* Add these styles to your bankMapStyles.css file */
+
+.bank-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* Adjust the logo container to better display the SVG */
+.logo-container {
+  background: white;
+  padding: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* Bank marker styles */
+.bank-marker {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index:9999
+}
+
+.bank-marker:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+}
+
+/* City label styles - Add these to your bankMapStyles.css file */
+.map-label {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.map-label div {
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  font-weight: bold;
+  text-shadow: 
+    0px 0px 2px white,
+    0px 0px 2px white,
+    0px 0px 2px white,
+    0px 0px 2px white;
+  white-space: nowrap;
+  text-align: center;
+  font-size: 12px;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Different sizes based on zoom level */
+.zoom-level-6 .map-label div {
+  font-size: 10px;
+}
+
+.zoom-level-7 .map-label div {
+  font-size: 11px;
+}
+
+.zoom-level-8 .map-label div {
+  font-size: 12px;
+}
+
+.zoom-level-9 .map-label div {
+  font-size: 13px;
+}
+
+.zoom-level-10 .map-label div {
+  font-size: 14px;
+}
+
+/* Viewport-specific styles */
+.map-label.in-viewport div {
+  opacity: 1;
+}
+
+.map-label.outside-viewport div {
+  opacity: 0.8;
+}
