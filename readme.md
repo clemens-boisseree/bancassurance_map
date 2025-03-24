@@ -203,9 +203,9 @@ Proprietäre Lizenz - Alle Rechte vorbehalten
 
 Copyright © 2025 [Ihr Unternehmen/Name]
 
-Diese Software und alle zugehörigen Dateien sind proprietäres und vertrauliches Eigentum von [Ihr Unternehmen/Name]. Die Verwendung dieser Software unterliegt den folgenden Bedingungen:
+Diese Software und alle zugehörigen Dateien sind proprietäres und vertrauliches Eigentum von Clemens Boisserée. Die Verwendung dieser Software unterliegt den folgenden Bedingungen:
 
-1. Jede Nutzung, Vervielfältigung, Veränderung, Verteilung oder sonstige Verwendung dieser Software ohne ausdrückliche schriftliche Genehmigung und vertragliche Regelung durch [Ihr Unternehmen/Name] ist strengstens untersagt.
+1. Jede Nutzung, Vervielfältigung, Veränderung, Verteilung oder sonstige Verwendung dieser Software ohne ausdrückliche schriftliche Genehmigung und vertragliche Regelung durch Clemens Boisserée ist strengstens untersagt.
 
 2. Die unbefugte Nutzung, Vervielfältigung oder Offenlegung dieser Software kann zu zivil- und strafrechtlichen Sanktionen führen und wird im größtmöglichen durch das Gesetz erlaubten Umfang verfolgt.
 
