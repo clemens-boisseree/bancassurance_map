@@ -1,8 +1,8 @@
 {
-  "name": "banksurance_map",
+  "name": "bancassurance_map",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/banksurance_map/test/",
+  "homepage": "/bancassurance_map/test/",
   "dependencies": {
     "@turf/turf": "^7.2.0",
     "leaflet": "^1.9.4",
